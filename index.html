@@ -566,6 +566,11 @@
                 output += `得分：${result.correctCount}× ${scoring[range]} =${score.toFixed(2)} 分\n\n`;
             }
 
+            // 听力部分总分
+            output += '<div style="background: #f0f4ff; padding: 10px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #667eea;">';
+            output += `<strong style="color: #667eea;">听力部分总分：${listeningScore.toFixed(2)} 分</strong>`;
+            output += '</div>\n\n';
+
             // 批改阅读部分
             output += '<div class="section-title">阅读部分</div>\n';
             
@@ -583,6 +588,11 @@
                 output += `正确题数：${result.correctCount} 题\n`;
                 output += `得分：${result.correctCount}× ${scoring[range]} =${score.toFixed(2)} 分\n\n`;
             }
+
+            // 阅读部分总分
+            output += '<div style="background: #f0f4ff; padding: 10px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #667eea;">';
+            output += `<strong style="color: #667eea;">阅读部分总分：${readingScore.toFixed(2)} 分</strong>`;
+            output += '</div>\n\n';
 
             totalScore = listeningScore + readingScore;
 
