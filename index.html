@@ -333,6 +333,9 @@
                     • 1-8：CBABCCBC<br>
                     • 1-8 CBABCCBC<br>
                     • 1-8:CBABCCBC<br>
+                    • 1～8 CBABCCBC（支持波浪号）<br>
+                    • 1~8 CBABCCBC<br>
+                    • 题号之间支持：- 横线、～ 波浪号、~ 等符号<br>
                     • 题号和答案之间可以有任意符号或空格<br>
                     • 程序会自动提取题号和字母答案
                 </div>
@@ -635,8 +638,8 @@
             }
 
             // 更灵活的解析：提取所有题号-答案对
-            // 支持各种格式：1-8：ABCD、1-8:ABCD、1-8 ABCD、1-8ABCD等
-            const answerPattern = /(\d+)\s*[-–—]\s*(\d+)\s*[：:：\s]*([A-Za-z\s]+)/g;
+            // 支持各种格式：1-8：ABCD、1-8:ABCD、1-8 ABCD、1～8 ABCD、1~8 ABCD等
+            const answerPattern = /(\d+)\s*[-–—～~]\s*(\d+)\s*[：:：\s]*([A-Za-z\s]+)/g;
             let match;
             
             while ((match = answerPattern.exec(input)) !== null) {
