@@ -296,7 +296,7 @@
                 <div class="exam-type-selector">
                     <label>选择考试类型：</label>
                     <select id="examType">
-                        <option value="auto">自动识别</option>
+                        <option value="">请选择考试类型</option>
                         <option value="六级">六级</option>
                         <option value="四级">四级</option>
                         <option value="模考2四级">模考2四级</option>
@@ -530,29 +530,19 @@
 
         function parseAndGrade(input) {
             // 获取用户选择的考试类型
-            const selectedExamType = document.getElementById('examType').value;
+            const examType = document.getElementById('examType').value;
+            
+            // 验证是否选择了考试类型
+            if (!examType) {
+                throw new Error('请在下拉框中选择考试类型！');
+            }
             
             // 解析基本信息
-            let examType = null;
             let studentName = '';
             const studentAnswers = {
                 listening: {},
                 reading: {}
             };
-
-            // 确定考试类型
-            if (selectedExamType === 'auto') {
-                // 自动识别
-                if (input.includes('六级')) {
-                    examType = '六级';
-                } else if (input.includes('四级')) {
-                    examType = '四级';
-                } else {
-                    throw new Error('无法自动识别考试类型，请在下拉框中手动选择"四级"或"六级"');
-                }
-            } else {
-                examType = selectedExamType;
-            }
 
             // 提取学生姓名（查找中文姓名）
             const nameMatch = input.match(/[\u4e00-\u9fa5]{2,4}/);
