@@ -55,30 +55,47 @@
         }
 
         .exam-type-selector {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .exam-type-selector label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-weight: bold;
             color: #333;
+            font-size: 16px;
         }
 
-        .exam-type-selector select {
-            width: 100%;
-            padding: 10px;
+        .exam-type-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .exam-type-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 16px;
             background: white;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
-        .exam-type-selector select:focus {
-            outline: none;
+        .exam-type-btn:hover {
             border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .exam-type-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         textarea {
@@ -168,6 +185,14 @@
         @media (max-width: 768px) {
             .content {
                 grid-template-columns: 1fr;
+            }
+
+            .exam-type-buttons {
+                flex-direction: column;
+            }
+
+            .exam-type-btn {
+                min-width: 100%;
             }
         }
 
@@ -295,13 +320,12 @@
                 <h2>📥 输入学生答案</h2>
                 <div class="exam-type-selector">
                     <label>选择考试类型：</label>
-                    <select id="examType">
-                        <option value="">请选择考试类型</option>
-                        <option value="六级">六级</option>
-                        <option value="四级">四级</option>
-                        <option value="模考2四级">模考2四级</option>
-                        <option value="模考2六级">模考2六级</option>
-                    </select>
+                    <div class="exam-type-buttons">
+                        <button type="button" class="exam-type-btn" data-type="六级">六级</button>
+                        <button type="button" class="exam-type-btn" data-type="四级">四级</button>
+                        <button type="button" class="exam-type-btn" data-type="模考2四级">模考2四级</button>
+                        <button type="button" class="exam-type-btn" data-type="模考2六级">模考2六级</button>
+                    </div>
                 </div>
                 <textarea id="studentInput" placeholder="可以输入任意格式，只需包含题号和答案即可：&#10;&#10;示例1：&#10;六级模拟卷1&#10;王佳瑜&#10;听力部分&#10;1-8：CBABCCBC&#10;9-15：CCBBCDC&#10;16-25：CBBCDCDBDD&#10;阅读部分&#10;26-35：CFBDIENAJH&#10;36-45：DGIMALHOBF&#10;46-55：ADBCBDCACB&#10;&#10;示例2（简化格式）：&#10;1-8 CBABCCBC&#10;9-15 CCBBCDC&#10;16-25 CBBCDCDBDD&#10;26-35 CFBDIENAJH&#10;36-45 DGIMALHOBF&#10;46-55 ADBCBDCACB"></textarea>
                 <div class="example">
@@ -478,6 +502,9 @@
     </div>
 
     <script>
+        // 当前选中的考试类型
+        let selectedExamType = '';
+
         // 正确答案数据库
         const correctAnswers = {
             '六级': {
@@ -585,11 +612,11 @@
 
         function parseAndGrade(input) {
             // 获取用户选择的考试类型
-            const examType = document.getElementById('examType').value;
+            const examType = selectedExamType;
             
             // 验证是否选择了考试类型
             if (!examType) {
-                throw new Error('请在下拉框中选择考试类型！');
+                throw new Error('请选择考试类型！');
             }
             
             // 解析基本信息
@@ -858,6 +885,24 @@
                 closeAnswerManager();
             }
         }
+
+        // 初始化考试类型按钮事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const examTypeButtons = document.querySelectorAll('.exam-type-btn');
+            
+            examTypeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    examTypeButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // 给当前按钮添加active类
+                    this.classList.add('active');
+                    
+                    // 设置选中的考试类型
+                    selectedExamType = this.getAttribute('data-type');
+                });
+            });
+        });
     </script>
 </body>
 </html>
