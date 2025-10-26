@@ -194,6 +194,17 @@
             .exam-type-btn {
                 min-width: 100%;
             }
+
+            .copy-btn {
+                position: static;
+                margin: 10px 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .result-panel h2 {
+                margin-bottom: 10px;
+            }
         }
 
         /* 答案管理窗口样式 */
@@ -306,6 +317,40 @@
             margin-left: 15px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
+
+        .copy-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+        }
+
+        .result-panel {
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -341,8 +386,11 @@
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel result-panel">
                 <h2>📊 批改结果</h2>
+                <button class="copy-btn" onclick="copyResult()" id="copyBtn">
+                    📋 复制结果
+                </button>
                 <div id="result">批改结果将在这里显示...</div>
             </div>
         </div>
@@ -611,6 +659,55 @@
             } catch (error) {
                 resultDiv.innerHTML = `<span class="error">解析错误：${error.message}</span>`;
             }
+        }
+
+        function copyResult() {
+            const resultDiv = document.getElementById('result');
+            const copyBtn = document.getElementById('copyBtn');
+            
+            // 获取结果文本（去除HTML标签）
+            const resultText = resultDiv.innerText || resultDiv.textContent;
+            
+            if (!resultText || resultText === '批改结果将在这里显示...') {
+                alert('还没有批改结果可以复制！');
+                return;
+            }
+            
+            // 复制到剪贴板
+            navigator.clipboard.writeText(resultText).then(() => {
+                // 复制成功，改变按钮样式
+                copyBtn.classList.add('copy-success');
+                copyBtn.innerHTML = '✓ 已复制';
+                
+                // 2秒后恢复原样
+                setTimeout(() => {
+                    copyBtn.classList.remove('copy-success');
+                    copyBtn.innerHTML = '📋 复制结果';
+                }, 2000);
+            }).catch(err => {
+                // 如果现代API失败，使用传统方法
+                const textArea = document.createElement('textarea');
+                textArea.value = resultText;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    copyBtn.classList.add('copy-success');
+                    copyBtn.innerHTML = '✓ 已复制';
+                    
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copy-success');
+                        copyBtn.innerHTML = '📋 复制结果';
+                    }, 2000);
+                } catch (err) {
+                    alert('复制失败，请手动复制结果');
+                }
+                
+                document.body.removeChild(textArea);
+            });
         }
 
         function parseAndGrade(input) {
