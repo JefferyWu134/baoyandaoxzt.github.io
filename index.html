@@ -370,6 +370,8 @@
                         <button type="button" class="exam-type-btn" data-type="四级">四级</button>
                         <button type="button" class="exam-type-btn" data-type="模考2四级">模考2四级</button>
                         <button type="button" class="exam-type-btn" data-type="模考2六级">模考2六级</button>
+                        <button type="button" class="exam-type-btn" data-type="模考3四级">模考3四级</button>
+                        <button type="button" class="exam-type-btn" data-type="模考3六级">模考3六级</button>
                     </div>
                 </div>
                 <textarea id="studentInput" placeholder="可以输入任意格式，只需包含题号和答案即可：&#10;&#10;示例1：&#10;六级模拟卷1&#10;王佳瑜&#10;听力部分&#10;1-8：CBABCCBC&#10;9-15：CCBBCDC&#10;16-25：CBBCDCDBDD&#10;阅读部分&#10;26-35：CFBDIENAJH&#10;36-45：DGIMALHOBF&#10;46-55：ADBCBDCACB&#10;&#10;示例2（简化格式）：&#10;1-8 CBABCCBC&#10;9-15 CCBBCDC&#10;16-25 CBBCDCDBDD&#10;26-35 CFBDIENAJH&#10;36-45 DGIMALHOBF&#10;46-55 ADBCBDCACB"></textarea>
@@ -545,6 +547,74 @@
                 </div>
             </div>
 
+            <div class="answer-section">
+                <h3>🎓 模考3四级答案</h3>
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: #667eea;">听力部分</strong>
+                    <div class="answer-group">
+                        <label>1-7 题：</label>
+                        <input type="text" id="cet4-mk3-1-7" maxlength="7">
+                    </div>
+                    <div class="answer-group">
+                        <label>8-15 题：</label>
+                        <input type="text" id="cet4-mk3-8-15" maxlength="8">
+                    </div>
+                    <div class="answer-group">
+                        <label>16-25 题：</label>
+                        <input type="text" id="cet4-mk3-16-25" maxlength="10">
+                    </div>
+                </div>
+                <div>
+                    <strong style="color: #667eea;">阅读部分</strong>
+                    <div class="answer-group">
+                        <label>26-35 题：</label>
+                        <input type="text" id="cet4-mk3-26-35" maxlength="10">
+                    </div>
+                    <div class="answer-group">
+                        <label>36-45 题：</label>
+                        <input type="text" id="cet4-mk3-36-45" maxlength="10">
+                    </div>
+                    <div class="answer-group">
+                        <label>46-55 题：</label>
+                        <input type="text" id="cet4-mk3-46-55" maxlength="10">
+                    </div>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>🎓 模考3六级答案</h3>
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: #667eea;">听力部分</strong>
+                    <div class="answer-group">
+                        <label>1-8 题：</label>
+                        <input type="text" id="cet6-mk3-1-8" maxlength="8">
+                    </div>
+                    <div class="answer-group">
+                        <label>9-15 题：</label>
+                        <input type="text" id="cet6-mk3-9-15" maxlength="7">
+                    </div>
+                    <div class="answer-group">
+                        <label>16-25 题：</label>
+                        <input type="text" id="cet6-mk3-16-25" maxlength="10">
+                    </div>
+                </div>
+                <div>
+                    <strong style="color: #667eea;">阅读部分</strong>
+                    <div class="answer-group">
+                        <label>26-35 题：</label>
+                        <input type="text" id="cet6-mk3-26-35" maxlength="10">
+                    </div>
+                    <div class="answer-group">
+                        <label>36-45 题：</label>
+                        <input type="text" id="cet6-mk3-36-45" maxlength="10">
+                    </div>
+                    <div class="answer-group">
+                        <label>46-55 题：</label>
+                        <input type="text" id="cet6-mk3-46-55" maxlength="10">
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-buttons">
                 <button class="btn-secondary" onclick="closeAnswerManager()">取消</button>
                 <button onclick="saveAnswers()">保存答案</button>
@@ -605,6 +675,30 @@
                     '36-45': 'DCGLAJIKHB',
                     '46-55': 'ACDBCADCBB'
                 }
+            },
+            '模考3四级': {
+                listening: {
+                    '1-7': 'CCBDBAC',
+                    '8-15': 'AACBBBDA',
+                    '16-25': 'ACCABBCDAB'
+                },
+                reading: {
+                    '26-35': 'CKEHDANLJO',
+                    '36-45': 'ELBJAQNDHC',
+                    '46-55': 'CCDBAACBCD'
+                }
+            },
+            '模考3六级': {
+                listening: {
+                    '1-8': 'BCADCDCA',
+                    '9-15': 'BBDBCAA',
+                    '16-25': 'DBBACCABAC'
+                },
+                reading: {
+                    '26-35': 'HEIAFCKLGN',
+                    '36-45': 'FCGJMLINKA',
+                    '46-55': 'BCBACDADBD'
+                }
             }
         };
 
@@ -635,6 +729,22 @@
                 '46-55': 14.2
             },
             '模考2六级': {
+                '1-8': 7.1,
+                '9-15': 7.1,
+                '16-25': 14.2,
+                '26-35': 3.55,
+                '36-45': 7.1,
+                '46-55': 14.2
+            },
+            '模考3四级': {
+                '1-7': 7.1,
+                '8-15': 7.1,
+                '16-25': 14.2,
+                '26-35': 3.55,
+                '36-45': 7.1,
+                '46-55': 14.2
+            },
+            '模考3六级': {
                 '1-8': 7.1,
                 '9-15': 7.1,
                 '16-25': 14.2,
@@ -935,6 +1045,22 @@
             document.getElementById('cet6-mk2-26-35').value = correctAnswers['模考2六级'].reading['26-35'];
             document.getElementById('cet6-mk2-36-45').value = correctAnswers['模考2六级'].reading['36-45'];
             document.getElementById('cet6-mk2-46-55').value = correctAnswers['模考2六级'].reading['46-55'];
+            
+            // 模考3四级答案
+            document.getElementById('cet4-mk3-1-7').value = correctAnswers['模考3四级'].listening['1-7'];
+            document.getElementById('cet4-mk3-8-15').value = correctAnswers['模考3四级'].listening['8-15'];
+            document.getElementById('cet4-mk3-16-25').value = correctAnswers['模考3四级'].listening['16-25'];
+            document.getElementById('cet4-mk3-26-35').value = correctAnswers['模考3四级'].reading['26-35'];
+            document.getElementById('cet4-mk3-36-45').value = correctAnswers['模考3四级'].reading['36-45'];
+            document.getElementById('cet4-mk3-46-55').value = correctAnswers['模考3四级'].reading['46-55'];
+            
+            // 模考3六级答案
+            document.getElementById('cet6-mk3-1-8').value = correctAnswers['模考3六级'].listening['1-8'];
+            document.getElementById('cet6-mk3-9-15').value = correctAnswers['模考3六级'].listening['9-15'];
+            document.getElementById('cet6-mk3-16-25').value = correctAnswers['模考3六级'].listening['16-25'];
+            document.getElementById('cet6-mk3-26-35').value = correctAnswers['模考3六级'].reading['26-35'];
+            document.getElementById('cet6-mk3-36-45').value = correctAnswers['模考3六级'].reading['36-45'];
+            document.getElementById('cet6-mk3-46-55').value = correctAnswers['模考3六级'].reading['46-55'];
         }
 
         function saveAnswers() {
@@ -970,6 +1096,22 @@
             correctAnswers['模考2六级'].reading['26-35'] = document.getElementById('cet6-mk2-26-35').value.toUpperCase();
             correctAnswers['模考2六级'].reading['36-45'] = document.getElementById('cet6-mk2-36-45').value.toUpperCase();
             correctAnswers['模考2六级'].reading['46-55'] = document.getElementById('cet6-mk2-46-55').value.toUpperCase();
+            
+            // 模考3四级答案
+            correctAnswers['模考3四级'].listening['1-7'] = document.getElementById('cet4-mk3-1-7').value.toUpperCase();
+            correctAnswers['模考3四级'].listening['8-15'] = document.getElementById('cet4-mk3-8-15').value.toUpperCase();
+            correctAnswers['模考3四级'].listening['16-25'] = document.getElementById('cet4-mk3-16-25').value.toUpperCase();
+            correctAnswers['模考3四级'].reading['26-35'] = document.getElementById('cet4-mk3-26-35').value.toUpperCase();
+            correctAnswers['模考3四级'].reading['36-45'] = document.getElementById('cet4-mk3-36-45').value.toUpperCase();
+            correctAnswers['模考3四级'].reading['46-55'] = document.getElementById('cet4-mk3-46-55').value.toUpperCase();
+            
+            // 模考3六级答案
+            correctAnswers['模考3六级'].listening['1-8'] = document.getElementById('cet6-mk3-1-8').value.toUpperCase();
+            correctAnswers['模考3六级'].listening['9-15'] = document.getElementById('cet6-mk3-9-15').value.toUpperCase();
+            correctAnswers['模考3六级'].listening['16-25'] = document.getElementById('cet6-mk3-16-25').value.toUpperCase();
+            correctAnswers['模考3六级'].reading['26-35'] = document.getElementById('cet6-mk3-26-35').value.toUpperCase();
+            correctAnswers['模考3六级'].reading['36-45'] = document.getElementById('cet6-mk3-36-45').value.toUpperCase();
+            correctAnswers['模考3六级'].reading['46-55'] = document.getElementById('cet6-mk3-46-55').value.toUpperCase();
             
             // 显示保存成功消息
             alert('答案已保存成功！');
